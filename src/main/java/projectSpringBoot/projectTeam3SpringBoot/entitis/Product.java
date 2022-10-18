@@ -1,4 +1,4 @@
-package projectSpringBoot.projectTeam3SpringBoot.product;
+package projectSpringBoot.projectTeam3SpringBoot.entitis;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
