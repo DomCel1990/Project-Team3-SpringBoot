@@ -4,11 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+
 public class Product {
 
+        private Long id;
         private String description;
         private double price;
         private double salePrice;
