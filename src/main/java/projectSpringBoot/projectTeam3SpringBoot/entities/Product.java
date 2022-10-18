@@ -1,10 +1,8 @@
-package projectSpringBoot.projectTeam3SpringBoot.entitis;
+package projectSpringBoot.projectTeam3SpringBoot.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
