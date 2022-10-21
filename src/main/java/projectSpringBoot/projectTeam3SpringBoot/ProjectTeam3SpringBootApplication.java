@@ -9,5 +9,9 @@ public class ProjectTeam3SpringBootApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ProjectTeam3SpringBootApplication.class, args);
 	}
+   //H2DATABASE
     //http://localhost:2022/h2-console
+
+	//SWAGGER
+	//http://localhost:2022/swagger-ui/#/
 }

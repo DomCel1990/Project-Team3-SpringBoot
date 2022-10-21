@@ -1,28 +1,33 @@
 package projectSpringBoot.projectTeam3SpringBoot.entities;
 
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table
 public class Shop {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String name;
     private String address;
     private String numberToContact;
     private String webSite;
-    private List<Employee> employee;
+   // private List<Employee> employee;
     //private Day day;
 
 
-    public Shop(String name, String address, String numberToContact, String webSite, List<Employee> employee) {
+    public Shop() {
+    }
+
+    public Shop(String name, String address, String numberToContact, String webSite) {
         this.name = name;
         this.address = address;
         this.numberToContact = numberToContact;
         this.webSite = webSite;
-        this.employee = employee;
+        //this.employee = employee;
     }
 
     public String getName() {
@@ -57,12 +62,6 @@ public class Shop {
         this.webSite = webSite;
     }
 
-    public List<Employee> getEmployee() {
-        return employee;
-    }
 
-    public void setEmployee(List<Employee> employee) {
-        this.employee = employee;
-    }
 }
 
