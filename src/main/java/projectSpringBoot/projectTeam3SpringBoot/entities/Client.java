@@ -19,7 +19,7 @@ public class Client {
     private String name;
     private String surname;
     @Column(unique = true)
-    private String email; //email unica
+    private String email;
     private String address;
     private int age;
     private boolean hasLoyaltyCard;
