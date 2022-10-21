@@ -34,7 +34,7 @@ public class EmployeeController {
             Optional<Employee> employee = employeeRepository.findById(id);
             return employee;
         } else
-            throw new Exception("This employee whit id: " + id + " no exist");
+            throw new Exception("The employee " + id + " doesn't exist");
     }
 
     @PutMapping("/{id}")
@@ -44,7 +44,7 @@ public class EmployeeController {
             Employee employeeUpdate = employeeRepository.save(employee);
             return employeeUpdate;
         }else
-            throw new Exception("This employee whit id: " + id + " no exist");
+            throw new Exception("The employee " + id + " doesn't exist");
     }
 
     @DeleteMapping("/{id}")
@@ -59,7 +59,5 @@ public class EmployeeController {
     public void deleteAll(){
         employeeRepository.deleteAll();
     }
-
-
 
 }
