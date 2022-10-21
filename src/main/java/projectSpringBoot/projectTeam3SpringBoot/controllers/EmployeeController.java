@@ -10,13 +10,13 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/employee")
+@RequestMapping(value = "/employee")
 public class EmployeeController {
 
     @Autowired
     EmployeeRepository employeeRepository;
 
-    @PostMapping
+    @PostMapping(value = "")
     public Employee createEmployee(@RequestBody Employee employee) {
         Employee employee1 = employeeRepository.save(employee);
         return employee1;
