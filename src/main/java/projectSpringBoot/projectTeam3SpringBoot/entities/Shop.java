@@ -22,7 +22,8 @@ public class Shop {
     public Shop() {
     }
 
-    public Shop(String name, String address, String numberToContact, String webSite) {
+    public Shop(Long id,String name, String address, String numberToContact, String webSite) {
+        this.id = id;
         this.name = name;
         this.address = address;
         this.numberToContact = numberToContact;
@@ -62,6 +63,8 @@ public class Shop {
         this.webSite = webSite;
     }
 
+    public Long getId() {return id;}
 
+    public void setId(Long id) {this.id = id;}
 }
 
