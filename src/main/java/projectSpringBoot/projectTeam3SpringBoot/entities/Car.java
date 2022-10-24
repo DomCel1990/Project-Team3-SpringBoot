@@ -11,7 +11,6 @@ public class Car {
     private Long id;
     private LocalDateTime checkIn;
     private LocalDateTime checkOut;
-
     public Car() {}
 
     public Car(LocalDateTime checkIn, LocalDateTime checkOut) {
