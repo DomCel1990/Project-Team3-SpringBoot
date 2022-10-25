@@ -16,6 +16,8 @@ public class Employee {
     private int hoursWorked;
     private boolean hasChildren;
     private LocalDate dateAssumption;
+    
+    public Employee(){}
 
     public Employee(Long id, String name, String surname, String email, int age, int hoursWorked, boolean hasChildren, LocalDate dateAssumption) {
         this.id = id;
