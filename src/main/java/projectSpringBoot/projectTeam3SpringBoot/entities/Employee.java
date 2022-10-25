@@ -16,10 +16,11 @@ public class Employee {
     private int hoursWorked;
     private boolean hasChildren;
     private LocalDate dateAssumption;
+    private Role role;
     
     public Employee(){}
 
-    public Employee(Long id, String name, String surname, String email, int age, int hoursWorked, boolean hasChildren, LocalDate dateAssumption) {
+    public Employee(Long id, String name, String surname, String email, int age, int hoursWorked, boolean hasChildren, LocalDate dateAssumption, Role role) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -28,6 +29,7 @@ public class Employee {
         this.hoursWorked = hoursWorked;
         this.hasChildren = hasChildren;
         this.dateAssumption = dateAssumption;
+        this.setRole(role);
     }
 
     public Long getId() {
@@ -92,5 +94,13 @@ public class Employee {
 
     public void setDateAssumption(LocalDate dateAssumption) {
         this.dateAssumption = dateAssumption;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }
