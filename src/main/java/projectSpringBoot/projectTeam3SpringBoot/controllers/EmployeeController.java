@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import projectSpringBoot.projectTeam3SpringBoot.entities.Employee;
 import projectSpringBoot.projectTeam3SpringBoot.repositories.EmployeeRepository;
+import projectSpringBoot.projectTeam3SpringBoot.services.EmployeeService;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,6 +16,9 @@ public class EmployeeController {
 
     @Autowired
     EmployeeRepository employeeRepository;
+
+    @Autowired
+    EmployeeService employeeService;
 
     @PostMapping(value = "")
     public Employee createEmployee(@RequestBody Employee employee) {
@@ -28,6 +32,14 @@ public class EmployeeController {
         return employees;
     }
 
+    @GetMapping("/salary/{id}")
+    public Double getSalaryEmployee(@PathVariable Long id){
+        return  employeeService.calculateBasicSalary()+
+                employeeService.calculateExtraordinarySalary()+
+                employeeService.calculateSenioritySalary()+
+                employeeService.calculateBasicSalary();
+
+    }
     @GetMapping("/{id}")
     public Optional<Employee> getEmployee(@PathVariable Long id) throws Exception {
         if (employeeRepository.existsById(id)) {
