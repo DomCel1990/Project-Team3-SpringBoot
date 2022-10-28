@@ -13,6 +13,8 @@ public class Product {
     private double salePrice;
     private String type;
     private String serialCode;
+    
+    public Product(){}
 
     public Product(Long id, String description, double price, double salePrice, String type, String serialCode) {
         this.id = id;
