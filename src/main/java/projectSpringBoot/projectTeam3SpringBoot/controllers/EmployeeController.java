@@ -20,26 +20,26 @@ public class EmployeeController {
     @Autowired
     EmployeeService employeeService;
 
-    @PostMapping(value = "")
+    @PostMapping("/create")
     public Employee createEmployee(@RequestBody Employee employee) {
         Employee employee1 = employeeRepository.save(employee);
         return employee1;
     }
+    @PostMapping("/{n}")
+    public void createEmployees(@PathVariable int n){
+        employeeService.createEmployees(n);
+    }
 
+    @GetMapping("/salary/{id}")
+    public double getSalaryEmployee(@PathVariable Long id){
+        return employeeService.getSalary(id);
+    }
     @GetMapping
     public List<Employee> getEmployees() {
         List<Employee> employees = employeeRepository.findAll();
         return employees;
     }
 
-    @GetMapping("/salary/{id}")
-    public Double getSalaryEmployee(@PathVariable Long id){
-        return  employeeService.calculateBasicSalary()+
-                employeeService.calculateExtraordinarySalary()+
-                employeeService.calculateSenioritySalary()+
-                employeeService.calculateBasicSalary();
-
-    }
     @GetMapping("/{id}")
     public Optional<Employee> getEmployee(@PathVariable Long id) throws Exception {
         if (employeeRepository.existsById(id)) {
