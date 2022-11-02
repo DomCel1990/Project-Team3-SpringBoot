@@ -41,9 +41,10 @@ public class EmployeeService {
 
     }
     
-    public double getSalary(Long id){
+    public String getSalary(Long id){
         double salary = employeeRepository.findById(id).get().calculatorSalary();
-        return salary;
+        return employeeRepository.findById(id).get().getId()+" "+" "+employeeRepository.findById(id).get().getName()+
+                " "+employeeRepository.findById(id).get().getSurname()+ "has a salary: "+ salary;
     }
 
 

@@ -1,4 +1,6 @@
 package projectSpringBoot.projectTeam3SpringBoot.entities;
+import lombok.ToString;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 @Entity
@@ -10,7 +12,6 @@ public class Employee {
     private Long id;
     private String name;
     private String surname;
-    @Column(unique = true)
     private String email;
     private int age;
     private int hoursWorked;
