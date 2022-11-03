@@ -25,6 +25,12 @@ public class EmployeeController {
         Employee employee1 = employeeRepository.save(employee);
         return employee1;
     }
+    @PostMapping("/createAll")
+    public List<Employee> createEmployee(@RequestBody List<Employee> employees){
+        List<Employee> employees1= employeeRepository.saveAllAndFlush(employees);
+        return employees1;
+    }
+    //crea n employees
     @PostMapping("/{n}")
     public void createEmployees(@PathVariable int n){
         employeeService.createEmployees(n);

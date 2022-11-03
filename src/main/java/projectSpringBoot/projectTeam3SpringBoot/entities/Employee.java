@@ -1,5 +1,6 @@
 package projectSpringBoot.projectTeam3SpringBoot.entities;
-import lombok.ToString;
+import projectSpringBoot.projectTeam3SpringBoot.enu.Permission;
+import projectSpringBoot.projectTeam3SpringBoot.enu.Role;
 
 import javax.persistence.*;
 import java.time.LocalDate;
