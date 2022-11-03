@@ -4,15 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 import projectSpringBoot.projectTeam3SpringBoot.entities.Employee;
-import projectSpringBoot.projectTeam3SpringBoot.entities.Name;
-import projectSpringBoot.projectTeam3SpringBoot.entities.Role;
-import projectSpringBoot.projectTeam3SpringBoot.entities.Surname;
+import projectSpringBoot.projectTeam3SpringBoot.enu.Name;
+import projectSpringBoot.projectTeam3SpringBoot.enu.Role;
+import projectSpringBoot.projectTeam3SpringBoot.enu.Surname;
 import projectSpringBoot.projectTeam3SpringBoot.repositories.EmployeeRepository;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 import java.util.Random;
 
 @Service

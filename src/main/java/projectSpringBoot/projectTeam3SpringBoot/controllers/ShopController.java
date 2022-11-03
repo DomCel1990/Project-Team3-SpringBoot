@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import projectSpringBoot.projectTeam3SpringBoot.entities.Shop;
 import projectSpringBoot.projectTeam3SpringBoot.repositories.ShopRepository;
+import projectSpringBoot.projectTeam3SpringBoot.services.ShopService;
 
 import java.util.List;
 
@@ -14,10 +15,16 @@ public class ShopController {
     @Autowired
     ShopRepository shopRepository;
 
+    @Autowired
+    ShopService shopService;
     @GetMapping("/getAll")
     public List<Shop> getShop() {
         List<Shop> shop = shopRepository.findAll();
         return shop;
+    }
+    @GetMapping("/cost/{id}")
+    public String getCost(@PathVariable Long id){
+        return shopService.getManagementCost(id);
     }
 
     @GetMapping("/{id}")

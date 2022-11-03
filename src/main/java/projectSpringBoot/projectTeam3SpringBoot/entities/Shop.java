@@ -10,41 +10,64 @@ public class Shop {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private String name;
-    private String address;
+    private Long idShop;
+    private String nameShop;
+    private String addressShop;
     private String numberToContact;
     private String webSite;
-   // private List<Employee> employee;
-    //private Day day;
-
+    @OneToMany(targetEntity = Employee.class,cascade = CascadeType.ALL)
+    @JoinColumn(name = "se_fk", referencedColumnName = "idShop")
+    private List<Employee> employees;
+    @OneToMany(targetEntity = Product.class,cascade = CascadeType.ALL)
+    @JoinColumn(name = "sP_fk", referencedColumnName = "idShop")
+    private List<Product> productsShop;
 
     public Shop() {
     }
 
-    public Shop(Long id,String name, String address, String numberToContact, String webSite) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
+    public Shop(String nameShop, String addressShop, String numberToContact, String webSite, List<Employee> employees, List<Product> productsShop) {
+        this.nameShop = nameShop;
+        this.addressShop = addressShop;
         this.numberToContact = numberToContact;
         this.webSite = webSite;
-        //this.employee = employee;
+        this.employees=employees;
+        this.productsShop = productsShop;
+    }
+
+    public double costProduct(){
+        double costProduct=0;
+        for (int i = 0; i <productsShop.size() ; i++) {
+            costProduct+= getProductsShop().get(i).getPrice();
+        }
+        return costProduct;
+    }
+    public double costEmployees(){
+        double costEmployees=0;
+        for (int i = 0; i < getEmployees().size() ; i++) {
+            costEmployees+= getEmployees().get(i).calculatorSalary();
+        }
+        return costEmployees;
+    }
+    public String managementCost(){
+        Double totalCost= costEmployees()+costProduct();
+        String managementCost= nameShop +" in the address, "+ addressShop+ " has this cost management: "+totalCost;
+        return managementCost;
     }
 
     public String getName() {
-        return name;
+        return nameShop;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.nameShop = name;
     }
 
     public String getAddress() {
-        return address;
+        return addressShop;
     }
 
     public void setAddress(String address) {
-        this.address = address;
+        this.addressShop = address;
     }
 
     public String getNumberToContact() {
@@ -63,8 +86,28 @@ public class Shop {
         this.webSite = webSite;
     }
 
-    public Long getId() {return id;}
+    public Long getId() {
+        return idShop;
+    }
 
-    public void setId(Long id) {this.id = id;}
+    public void setId(Long id) {
+        this.idShop = id;
+    }
+
+    public List<Product> getProductsShop() {
+        return productsShop;
+    }
+
+    public void setProductsShop(List<Product> productsShop) {
+        this.productsShop = productsShop;
+    }
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
+    }
 }
 

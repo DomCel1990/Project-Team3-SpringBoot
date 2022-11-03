@@ -1,4 +1,4 @@
-package projectSpringBoot.projectTeam3SpringBoot.entities;
+package projectSpringBoot.projectTeam3SpringBoot.enu;
 
 import java.util.List;
 import java.util.Random;

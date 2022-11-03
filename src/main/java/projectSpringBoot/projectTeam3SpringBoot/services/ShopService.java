@@ -11,6 +11,12 @@ public class ShopService {
     @Autowired
     ShopRepository shopRepository;
 
+    public String getManagementCost(Long id){
+        String s= shopRepository.findById(id).get().managementCost();
+        return s;
+    }
+
+
 
 
 }

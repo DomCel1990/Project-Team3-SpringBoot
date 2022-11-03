@@ -1,4 +1,4 @@
-package projectSpringBoot.projectTeam3SpringBoot.entities;
+package projectSpringBoot.projectTeam3SpringBoot.enu;
 
 public enum Permission {
     ADMIN,
