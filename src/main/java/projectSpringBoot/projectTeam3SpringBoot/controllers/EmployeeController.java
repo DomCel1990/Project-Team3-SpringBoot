@@ -31,13 +31,17 @@ public class EmployeeController {
     }
 
     @GetMapping("/salary/{id}")
-    public double getSalaryEmployee(@PathVariable Long id){
+    public String getSalaryEmployee(@PathVariable Long id){
         return employeeService.getSalary(id);
     }
     @GetMapping
     public List<Employee> getEmployees() {
         List<Employee> employees = employeeRepository.findAll();
         return employees;
+    }
+    @PostMapping("/createAll/{n}")
+    public void createAll(@PathVariable int n){
+        employeeService.createEmployees(n);
     }
 
     @GetMapping("/{id}")
