@@ -46,7 +46,8 @@ public class SpringFoxConfig {
                         new Tag("employee-controller", "This employee controller"),
                         new Tag("product-controller", "This product controller"),
                         new Tag("car-controller", "This car controller"),
-                        new Tag("shop-controller", "This shop controller")
+                        new Tag("shop-controller", "This shop controller"),
+                        new Tag("order-controller", "This is order controller")
                 )
                 ;
     }

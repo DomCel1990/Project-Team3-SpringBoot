@@ -1,9 +1,10 @@
 package projectSpringBoot.projectTeam3SpringBoot.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import projectSpringBoot.projectTeam3SpringBoot.entities.Employee;
+import projectSpringBoot.projectTeam3SpringBoot.enu.Role;
 import projectSpringBoot.projectTeam3SpringBoot.repositories.EmployeeRepository;
 import projectSpringBoot.projectTeam3SpringBoot.services.EmployeeService;
 
@@ -22,63 +23,50 @@ public class EmployeeController {
 
     @PostMapping("/create")
     public Employee createEmployee(@RequestBody Employee employee) {
-        Employee employee1 = employeeRepository.save(employee);
-        return employee1;
+        return employeeService.createEmployee(employee);
     }
-    @PostMapping("/createAll")
-    public List<Employee> createEmployee(@RequestBody List<Employee> employees){
-        List<Employee> employees1= employeeRepository.saveAllAndFlush(employees);
-        return employees1;
+
+    @PostMapping("/creates")
+    public List<Employee> createEmployee(@RequestBody List<Employee> employees) {
+        return employeeService.createEmployees(employees);
     }
-    //crea n employees
-    @PostMapping("/{n}")
-    public void createEmployees(@PathVariable int n){
+    @Deprecated
+    @PostMapping("/creates/{n}")
+    public void createEmployees(@PathVariable int n) {
         employeeService.createEmployees(n);
     }
 
     @GetMapping("/salary/{id}")
-    public String getSalaryEmployee(@PathVariable Long id){
+    public String getSalaryEmployee(@PathVariable Long id) {
         return employeeService.getSalary(id);
     }
-    @GetMapping
-    public List<Employee> getEmployees() {
-        List<Employee> employees = employeeRepository.findAll();
-        return employees;
-    }
-    @PostMapping("/createAll/{n}")
-    public void createAll(@PathVariable int n){
-        employeeService.createEmployees(n);
-    }
 
+    @GetMapping("/filter")
+    public List<Employee> findByNameOrSurname(@RequestParam(required = false) String name,@RequestParam(required = false) String surname,@RequestParam(required = false) Role role,@RequestParam(required = false) String email){
+        return employeeRepository.findByNameORDepartment(name, surname, role, email);
+    }
     @GetMapping("/{id}")
     public Optional<Employee> getEmployee(@PathVariable Long id) throws Exception {
-        if (employeeRepository.existsById(id)) {
-            Optional<Employee> employee = employeeRepository.findById(id);
-            return employee;
-        } else
-            throw new Exception("The employee " + id + " doesn't exist");
+        return employeeService.getEmployee(id);
+    }
+
+    @GetMapping("/gets")
+    public Page<Employee> getAllEmployee(@RequestParam(required = false) Optional<Integer> page, @RequestParam(required = false) Optional<Integer> size) {
+        return employeeService.getAllEmployee(page, size);
     }
 
     @PutMapping("/{id}")
     public Employee employeeUpdate(@PathVariable Long id, @RequestBody Employee employee) throws Exception {
-        if(employeeRepository.existsById(id)) {
-            employee.setId(id);
-            Employee employeeUpdate = employeeRepository.save(employee);
-            return employeeUpdate;
-        }else
-            throw new Exception("The employee " + id + " doesn't exist");
+        return employeeService.employeeUpdate(id, employee);
     }
 
     @DeleteMapping("/{id}")
-    public void employeeDelete(@PathVariable Long id){
-        if(!employeeRepository.existsById(id))
-            System.out.println(HttpStatus.CONFLICT);
-        else
-            employeeRepository.deleteById(id);
+    public void employeeDelete(@PathVariable Long id) {
+        employeeService.employeeDelete(id);
     }
 
     @DeleteMapping
-    public void deleteAll(){
+    public void deleteAll() {
         employeeRepository.deleteAll();
     }
 

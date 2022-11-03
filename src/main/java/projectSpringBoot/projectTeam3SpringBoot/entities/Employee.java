@@ -19,7 +19,7 @@ public class Employee {
     private boolean hasChildren;
     private LocalDate dateAssumption;
     private Role role;
-    
+
     public Employee(){}
 
     public Employee(String name, String surname, String email, int age, int hoursWorked, boolean hasChildren, LocalDate dateAssumption, Role role) {
@@ -30,7 +30,7 @@ public class Employee {
         this.hoursWorked = hoursWorked;
         this.hasChildren = hasChildren;
         this.dateAssumption = dateAssumption;
-        this.setRole(role);
+        this.role=role;
     }
 
     public boolean hasPermission(Permission permission) {
@@ -168,4 +168,6 @@ public class Employee {
     public void setRole(Role role) {
         this.role = role;
     }
+
+
 }
