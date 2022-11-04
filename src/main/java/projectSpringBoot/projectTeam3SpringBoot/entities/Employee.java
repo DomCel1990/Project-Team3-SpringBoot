@@ -20,7 +20,16 @@ public class Employee {
     private LocalDate dateAssumption;
     private Role role;
 
+    private double salary;
+
     public Employee(){}
+
+    public Employee(String name, String surname, Role role, double salary) {
+        this.name = name;
+        this.surname = surname;
+        this.role = role;
+        this.salary = salary;
+    }
 
     public Employee(String name, String surname, String email, int age, int hoursWorked, boolean hasChildren, LocalDate dateAssumption, Role role) {
         this.name = name;
