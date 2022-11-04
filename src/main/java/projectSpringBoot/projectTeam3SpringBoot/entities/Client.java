@@ -1,11 +1,14 @@
 package projectSpringBoot.projectTeam3SpringBoot.entities;
 
+import org.springframework.lang.Nullable;
+
 import javax.persistence.*;
 
 @Entity
 @Table
 public class Client {
     @Id
+    @Nullable
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nameClient;

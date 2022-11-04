@@ -36,10 +36,6 @@ public class EmployeeController {
         employeeService.createEmployees(n);
     }
 
-    @GetMapping("/salary/{id}")
-    public String getSalaryEmployee(@PathVariable Long id) {
-        return employeeService.getSalary(id);
-    }
 
     @GetMapping("/filter")
     public List<Employee> findByNameOrSurname(@RequestParam(required = false) String name,@RequestParam(required = false) String surname,@RequestParam(required = false) Role role,@RequestParam(required = false) String email){

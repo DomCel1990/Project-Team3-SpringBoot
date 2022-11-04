@@ -12,6 +12,7 @@ import projectSpringBoot.projectTeam3SpringBoot.repositories.ProductRepository;
 import java.util.List;
 
 @RestController
+@RequestMapping("/order")
 public class OrderController {
     @Autowired
     private OrderRepository orderRepository;
@@ -22,7 +23,7 @@ public class OrderController {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    @PostMapping("/order")
+    @PostMapping("/create")
     public Order placeOrder(@RequestBody Order order){
         return orderRepository.save(order);
     }

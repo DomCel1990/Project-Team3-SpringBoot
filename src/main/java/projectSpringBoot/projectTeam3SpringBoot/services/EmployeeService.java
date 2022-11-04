@@ -47,12 +47,6 @@ public class EmployeeService {
         }
     }
 
-    public String getSalary(Long id) {
-        double salary = employeeRepository.findById(id).get().calculatorSalary();
-        return employeeRepository.findById(id).get().getId() + " " + " " + employeeRepository.findById(id).get().getName() +
-                " " + employeeRepository.findById(id).get().getSurname() + "has a salary: " + salary;
-    }
-
     public Employee createEmployee(Employee employee) {
         Employee employee1 = employeeRepository.save(employee);
         return employee1;

@@ -1,10 +1,12 @@
 package projectSpringBoot.projectTeam3SpringBoot.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import projectSpringBoot.projectTeam3SpringBoot.entities.Car;
 import projectSpringBoot.projectTeam3SpringBoot.repositories.CarRepository;
+import projectSpringBoot.projectTeam3SpringBoot.services.CarService;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,48 +17,42 @@ public class CarController {
 
     @Autowired
     CarRepository carRepository;
+    @Autowired
+    CarService carService;
 
-    @PostMapping
-    public Car car(@RequestBody Car car){
+    @PostMapping("/create")
+    public Car car(@RequestBody Car car) {
         Car car1 = carRepository.save(car);
         return car1;
     }
 
-    @GetMapping
-    public List<Car> getCars(){
-        List<Car> cars = carRepository.findAll();
-        return cars;
+    @PostMapping("/creates")
+    public List<Car> createCars(@RequestBody List<Car> cars) {
+        return carService.createCars(cars);
     }
 
-    @GetMapping("/{id}")
-    public Optional<Car> getCarById(@PathVariable Long id) throws Exception{
-        if (carRepository.existsById(id)){
-            Optional<Car> car = carRepository.findById(id);
-            return car;
-        }else
-            throw new Exception("The car " + id + "doesn't exist");
+    @GetMapping("/gets")
+    public Page<Car> getCars(@RequestParam(required = false) Optional<Integer> page, @RequestParam(required = false) Optional<Integer> size) {
+        return carService.getCars(page, size);
     }
 
-    @PutMapping("/{id}")
-    public Car carUpdate(@PathVariable Long id, @RequestBody Car car) throws Exception{
-        if(carRepository.existsById(id)){
-            car.setId(id);
-            Car carUpdate = carRepository.save(car);
-            return carUpdate;
-        }else
-            throw new Exception("The car " + id + " doesn't exist");
+    @GetMapping("/get/{id}")
+    public Optional<Car> getCarById(@PathVariable Long id) throws Exception {
+        return carService.getCarById(id);
     }
 
-    @DeleteMapping
-    public void deleteAll(){
+    @PutMapping("/update/{id}")
+    public Car carUpdate(@PathVariable Long id, @RequestBody Car car) throws Exception {
+       return carService.carUpdate(id,car);
+    }
+
+    @DeleteMapping("deletes")
+    public void deleteAll() {
         carRepository.deleteAll();
     }
 
-    @DeleteMapping("/{id}")
-    public void carDelete(@PathVariable Long id){
-        if(!carRepository.existsById(id))
-            System.out.println(HttpStatus.CONFLICT);
-        else
-            carRepository.deleteById(id);
+    @DeleteMapping("/delete/{id}")
+    public void carDelete(@PathVariable Long id) {
+        carService.carDelete(id);
     }
 }
