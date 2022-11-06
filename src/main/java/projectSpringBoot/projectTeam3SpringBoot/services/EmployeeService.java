@@ -63,6 +63,7 @@ public class EmployeeService {
         dto.setId(employee.get().getId());
         dto.setName(employee.get().getName());
         dto.setSurname(employee.get().getSurname());
+        dto.setEmail(employee.get().getEmail());
         dto.setSalary(employee.get().calculatorSalary());
         return dto;
     }
