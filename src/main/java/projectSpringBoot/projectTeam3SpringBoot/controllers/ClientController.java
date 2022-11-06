@@ -1,10 +1,12 @@
 package projectSpringBoot.projectTeam3SpringBoot.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import projectSpringBoot.projectTeam3SpringBoot.entities.Client;
 import projectSpringBoot.projectTeam3SpringBoot.repositories.ClientRepository;
+import projectSpringBoot.projectTeam3SpringBoot.services.ClientService;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,6 +17,8 @@ public class ClientController {
 
     @Autowired
     ClientRepository clientRepository;
+    @Autowired
+    ClientService clientService;
 
     @PostMapping
     public Client client(@RequestBody Client client){
@@ -22,29 +26,19 @@ public class ClientController {
         return client1;
     }
 
-    @GetMapping
-    public List<Client> getClients(){
-        List<Client> clients = clientRepository.findAll();
-        return clients;
+    @GetMapping("/clients")
+    public Page<Client> getAllClients(@RequestParam Optional<Integer> page, @RequestParam Optional<Integer> size){
+        return clientService.getAllClients(page, size);
     }
 
     @GetMapping("/{id}")
     public Optional<Client> getClient(@PathVariable Long id) throws Exception {
-        if (clientRepository.existsById(id)) {
-            Optional<Client> client = clientRepository.findById(id);
-            return client;
-        } else
-            throw new Exception("The client " + id + " doesn't exist");
+        return clientService.getClient(id);
     }
 
     @PutMapping("/{id}")
     public Client clientUpdate(@PathVariable Long id, @RequestBody Client client) throws Exception{
-        if(clientRepository.existsById(id)){
-            client.setId(id);
-            Client clientUpdate = clientRepository.save(client);
-            return clientUpdate;
-        }else
-            throw new Exception("The client " + id + " doesn't exist");
+        return clientService.clientUpdate(id, client);
     }
 
     @DeleteMapping
@@ -54,9 +48,6 @@ public class ClientController {
 
     @DeleteMapping("/{id}")
     public void clientDelete(@PathVariable Long id){
-        if(!clientRepository.existsById(id))
-            System.out.println(HttpStatus.CONFLICT);
-        else
-            clientRepository.deleteById(id);
+        clientService.clientDelete(id);
     }
 }
