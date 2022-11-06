@@ -1,3 +1,4 @@
+spring.environment: default
 server.port: 2022
 spring.mvc:
     pathmatch:
@@ -20,3 +21,15 @@ spring.jpa:
       ddl-auto: update
 jackson.serialization:
       fail-on-empty-beans: false
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+server.port: 2024
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+server.port: 2023
