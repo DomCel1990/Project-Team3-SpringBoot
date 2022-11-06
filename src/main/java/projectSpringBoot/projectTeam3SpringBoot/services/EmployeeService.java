@@ -11,13 +11,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import projectSpringBoot.projectTeam3SpringBoot.dto.EmployeeDTO;
 import projectSpringBoot.projectTeam3SpringBoot.entities.Employee;
+import projectSpringBoot.projectTeam3SpringBoot.entities.Order;
 import projectSpringBoot.projectTeam3SpringBoot.enu.Name;
 import projectSpringBoot.projectTeam3SpringBoot.enu.Role;
 import projectSpringBoot.projectTeam3SpringBoot.enu.Surname;
 import projectSpringBoot.projectTeam3SpringBoot.repositories.EmployeeRepository;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -30,6 +33,7 @@ public class EmployeeService {
 
     public void createEmployees(@RequestParam(required = false) int n) {
         Random random = new Random();
+        List<Order> orderss= new ArrayList<Order>();
         for (int i = 0; i < n; i++) {
             String randomAttributeEmployee = random.ints(10, 97, 122)
                     .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
@@ -42,7 +46,8 @@ public class EmployeeService {
                     random.nextInt(120, 200),
                     random.nextBoolean(),
                     LocalDate.of(random.nextInt(1980, 2022), random.nextInt(1, 12), random.nextInt(1, 31)),
-                    Role.getRandomRoles()
+                    Role.getRandomRoles(),
+                    orderss
             ));
         }
     }
@@ -50,6 +55,17 @@ public class EmployeeService {
     public Employee createEmployee(Employee employee) {
         Employee employee1 = employeeRepository.save(employee);
         return employee1;
+    }
+
+    public EmployeeDTO getEmployeeSalary(Long id) {
+        Optional<Employee> employee = employeeRepository.findById(id);
+        EmployeeDTO dto = new EmployeeDTO();
+        dto.setId(employee.get().getId());
+        dto.setName(employee.get().getName());
+        dto.setSurname(employee.get().getSurname());
+        dto.setEmail(employee.get().getEmail());
+        dto.setSalary(employee.get().calculatorSalary());
+        return dto;
     }
 
     public List<Employee> createEmployees(List<Employee> employees) {

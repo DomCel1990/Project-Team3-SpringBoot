@@ -3,6 +3,7 @@ package projectSpringBoot.projectTeam3SpringBoot.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
+import projectSpringBoot.projectTeam3SpringBoot.dto.EmployeeDTO;
 import projectSpringBoot.projectTeam3SpringBoot.entities.Employee;
 import projectSpringBoot.projectTeam3SpringBoot.enu.Role;
 import projectSpringBoot.projectTeam3SpringBoot.repositories.EmployeeRepository;
@@ -36,7 +37,10 @@ public class EmployeeController {
         employeeService.createEmployees(n);
     }
 
-
+    @GetMapping("/salary/{id}")
+    public EmployeeDTO getEmployeeSalary(@PathVariable Long id){
+        return employeeService.getEmployeeSalary(id);
+    }
     @GetMapping("/filter")
     public List<Employee> findByNameOrSurname(@RequestParam(required = false) String name,@RequestParam(required = false) String surname,@RequestParam(required = false) Role role,@RequestParam(required = false) String email){
         return employeeRepository.findByNameORDepartment(name, surname, role, email);
