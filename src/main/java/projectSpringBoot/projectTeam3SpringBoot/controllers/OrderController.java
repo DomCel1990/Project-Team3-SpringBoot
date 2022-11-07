@@ -17,11 +17,6 @@ public class OrderController {
     @Autowired
     private OrderRepository orderRepository;
 
-    @Autowired
-    private ProductRepository productRepository;
-
-    @Autowired
-    private EmployeeRepository employeeRepository;
 
     @PostMapping("/create")
     public Order placeOrder(@RequestBody Order order){
