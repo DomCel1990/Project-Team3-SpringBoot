@@ -11,6 +11,6 @@ public class ClientDTO {
     private String name;
     private String surname;
     private Long idOrder;
-    private List<Product> products;
+    private List<ClientProductDTO> products;
 
 }
