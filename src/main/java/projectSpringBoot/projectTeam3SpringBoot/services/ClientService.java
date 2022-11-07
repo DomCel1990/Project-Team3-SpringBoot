@@ -56,7 +56,7 @@ public class ClientService {
             clientProductDTOList.add(new ClientProductDTO(
                     order.get().getProductList().get(i).getDescription(),
                     order.get().getProductList().get(i).getType(),
-                    order.get().getProductList().get(i).getPrice()
+                    order.get().getProductList().get(i).getSalePrice()
             ));
         }
 
@@ -66,6 +66,7 @@ public class ClientService {
         dto.setSurname(order.get().getClient().getSurnameClient());
         dto.setIdOrder(order.get().getIdOrder());
         dto.setProducts(clientProductDTOList);
+        dto.setTotalcost(order.get().getTotalSalePrice());
 
         return dto;
     }

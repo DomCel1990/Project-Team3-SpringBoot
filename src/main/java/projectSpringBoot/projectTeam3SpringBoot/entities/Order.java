@@ -23,8 +23,28 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;
-    @OneToMany(targetEntity = Product.class,cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = Product.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "or_fk", referencedColumnName = "id")
     private List<Product> productList;
+
+    public double getTotalSalePrice() {
+        double sum = 0;
+        for (int i = 0; i < productList.size(); i++) {
+            sum += productList.get(i).getSalePrice();
+        }
+        return sum;
+    }
+
+    public double getTotalPrice() {
+        double sum = 0;
+        for (int i = 0; i < productList.size(); i++) {
+            sum += productList.get(i).getPrice();
+        }
+        return sum;
+    }
+    public double getProfit() {
+        double profit = getTotalSalePrice() - getTotalPrice();
+        return profit;
+    }
 
 }
