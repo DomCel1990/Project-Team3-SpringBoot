@@ -7,6 +7,7 @@ import projectSpringBoot.projectTeam3SpringBoot.repositories.ShopRepository;
 import projectSpringBoot.projectTeam3SpringBoot.services.ShopService;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/shop")
@@ -29,8 +30,8 @@ public class ShopController {
 
     @GetMapping("/{id}")
     public Shop getOneProduct(@PathVariable Long id) {
-        Shop shop = shopRepository.getById(id);
-        return shop;
+        Optional<Shop> shop = shopRepository.findById(id);
+        return shop.get();
     }
 
     @PostMapping("/post")

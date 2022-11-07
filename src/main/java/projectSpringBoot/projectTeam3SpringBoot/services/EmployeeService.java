@@ -7,9 +7,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import projectSpringBoot.projectTeam3SpringBoot.dto.EmployeeDTO;
 import projectSpringBoot.projectTeam3SpringBoot.entities.Employee;
@@ -60,7 +57,7 @@ public class EmployeeService {
     public EmployeeDTO getEmployeeSalary(Long id) {
         Optional<Employee> employee = employeeRepository.findById(id);
         EmployeeDTO dto = new EmployeeDTO();
-        dto.setId(employee.get().getId());
+        dto.setIdEmployee(employee.get().getIdEmployee());
         dto.setName(employee.get().getName());
         dto.setSurname(employee.get().getSurname());
         dto.setEmail(employee.get().getEmail());
@@ -96,7 +93,7 @@ public class EmployeeService {
 
     public Employee employeeUpdate(Long id, Employee employee) throws Exception {
         if (employeeRepository.existsById(id)) {
-            employee.setId(id);
+            employee.setIdEmployee(id);
             Employee employeeUpdate = employeeRepository.save(employee);
             return employeeUpdate;
         } else

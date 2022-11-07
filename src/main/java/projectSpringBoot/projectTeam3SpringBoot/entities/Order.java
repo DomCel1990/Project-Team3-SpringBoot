@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.security.PrivateKey;
 import java.util.List;
 
 @Entity
@@ -15,13 +14,13 @@ import java.util.List;
 @NoArgsConstructor
 public class Order {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    @Column(name = "id")
+    private Long idOrder;
     @OneToOne
     @JoinColumn(name = "employee_id")
     private Employee employee;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;
     @OneToMany(targetEntity = Product.class,cascade = CascadeType.ALL)

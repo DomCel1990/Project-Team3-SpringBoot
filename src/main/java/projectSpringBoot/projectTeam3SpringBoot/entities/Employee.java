@@ -11,8 +11,8 @@ import java.util.List;
 public class Employee {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idEmployee;
     private String name;
     private String surname;
     private String email;
@@ -101,12 +101,12 @@ public class Employee {
 
 
 
-    public Long getId() {
-        return id;
+    public Long getIdEmployee() {
+        return idEmployee;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdEmployee(Long idEmployee) {
+        this.idEmployee = idEmployee;
     }
 
     public String getName() {

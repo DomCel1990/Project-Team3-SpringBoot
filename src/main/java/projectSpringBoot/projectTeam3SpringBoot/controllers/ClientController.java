@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import projectSpringBoot.projectTeam3SpringBoot.dto.ClientDTO;
 import projectSpringBoot.projectTeam3SpringBoot.entities.Client;
 import projectSpringBoot.projectTeam3SpringBoot.repositories.ClientRepository;
 import projectSpringBoot.projectTeam3SpringBoot.services.ClientService;
@@ -34,6 +35,10 @@ public class ClientController {
     @GetMapping("/{id}")
     public Optional<Client> getClient(@PathVariable Long id) throws Exception {
         return clientService.getClient(id);
+    }
+    @GetMapping("/details/{id}")
+    public ClientDTO getDetailsOrderClient(@PathVariable Long id){
+        return clientService.getInformatioOrder(id);
     }
 
     @PutMapping("/{id}")

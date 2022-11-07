@@ -5,7 +5,7 @@ import projectSpringBoot.projectTeam3SpringBoot.entities.Employee;
 
 @Data
 public class EmployeeDTO {
-    private Long id;
+    private Long idEmployee;
     private String name;
     private String surname;
     private String email;

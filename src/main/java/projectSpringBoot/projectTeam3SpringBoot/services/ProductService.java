@@ -6,9 +6,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import projectSpringBoot.projectTeam3SpringBoot.entities.Employee;
 import projectSpringBoot.projectTeam3SpringBoot.entities.Product;
 import projectSpringBoot.projectTeam3SpringBoot.repositories.ProductRepository;
 
@@ -47,7 +44,7 @@ public class ProductService {
     }
     public Product putProduct(Long id, Product product) throws Exception {
         if (productRepository.existsById(id)) {
-            product.setId(id);
+            product.setIdProduct(id);
             Product product1 = productRepository.save(product);
             return product1;
         } else

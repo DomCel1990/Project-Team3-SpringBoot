@@ -3,7 +3,10 @@ package projectSpringBoot.projectTeam3SpringBoot.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
+import projectSpringBoot.projectTeam3SpringBoot.dto.ProductOrderDTO;
+import projectSpringBoot.projectTeam3SpringBoot.entities.Order;
 import projectSpringBoot.projectTeam3SpringBoot.entities.Product;
+import projectSpringBoot.projectTeam3SpringBoot.repositories.OrderRepository;
 import projectSpringBoot.projectTeam3SpringBoot.repositories.ProductRepository;
 import projectSpringBoot.projectTeam3SpringBoot.services.ProductService;
 
@@ -18,6 +21,8 @@ public class ProductController {
     ProductRepository productRepository;
     @Autowired
     ProductService productService;
+    @Autowired
+    OrderRepository orderRepository;
 
     @PostMapping("/create")
     public Product product(@RequestBody Product product) {
@@ -38,6 +43,13 @@ public class ProductController {
     @GetMapping("get/{id}")
     public Optional<Product> getOneProduct(@PathVariable Long id) throws Exception {
         return productService.getProduct(id);
+    }
+    @GetMapping("/repo/{id}")
+    public ProductOrderDTO getProductOrder(@PathVariable Long id){
+        Optional<Order> order = orderRepository.findById(id);
+        ProductOrderDTO dto= new ProductOrderDTO();
+        dto.setOrder(order.get());
+        return dto;
     }
 
     @PutMapping("/update")

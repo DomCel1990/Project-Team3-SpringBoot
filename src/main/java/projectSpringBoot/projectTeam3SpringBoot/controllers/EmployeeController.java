@@ -50,7 +50,7 @@ public class EmployeeController {
         return employeeService.getEmployee(id);
     }
 
-    @GetMapping("/gets")
+    @GetMapping("/")
     public Page<Employee> getAllEmployee(@RequestParam(required = false) Optional<Integer> page, @RequestParam(required = false) Optional<Integer> size) {
         return employeeService.getAllEmployee(page, size);
     }

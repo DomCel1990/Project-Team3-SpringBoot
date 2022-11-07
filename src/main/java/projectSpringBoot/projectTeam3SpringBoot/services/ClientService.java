@@ -7,8 +7,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import projectSpringBoot.projectTeam3SpringBoot.dto.ClientDTO;
 import projectSpringBoot.projectTeam3SpringBoot.entities.Client;
+import projectSpringBoot.projectTeam3SpringBoot.entities.Order;
 import projectSpringBoot.projectTeam3SpringBoot.repositories.ClientRepository;
+import projectSpringBoot.projectTeam3SpringBoot.repositories.OrderRepository;
 
 import java.util.Optional;
 
@@ -17,6 +20,8 @@ public class ClientService {
 
     @Autowired
     private ClientRepository clientRepository;
+    @Autowired
+    private OrderRepository orderRepository;
 
     public Page<Client> getAllClients(Optional<Integer> page, Optional<Integer> size) {
         Pageable pageable = null;
@@ -39,9 +44,19 @@ public class ClientService {
             throw new Exception("The client " + id + " doesn't exist");
     }
 
+    public ClientDTO getInformatioOrder(Long id){
+        Optional<Order> order = orderRepository.findById(id);
+        ClientDTO dto = new ClientDTO();
+        dto.setId(order.get().getClient().getIdClient());
+        dto.setName(order.get().getClient().getNameClient());
+        dto.setSurname(order.get().getClient().getSurnameClient());
+        dto.setIdOrder(order.get().getIdOrder());
+        dto.setProducts(order.get().getProductList());
+        return dto;
+    }
     public Client clientUpdate(Long id, Client client) throws Exception{
         if(clientRepository.existsById(id)){
-            client.setId(id);
+            client.setIdClient(id);
             Client clientUpdate = clientRepository.save(client);
             return clientUpdate;
         }else

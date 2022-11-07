@@ -8,9 +8,9 @@ import javax.persistence.*;
 @Table
 public class Client {
     @Id
-    @Nullable
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    @Column(precision = 1)
+    private Long idClient;
     private String nameClient;
     private String surnameClient;
     @Column(unique = true)
@@ -30,12 +30,12 @@ public class Client {
 
 
 
-    public Long getId() {
-        return id;
+    public Long getIdClient() {
+        return idClient;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdClient(Long idClient) {
+        this.idClient = idClient;
     }
 
     public String getNameClient() {
