@@ -12,5 +12,6 @@ public class ClientDTO {
     private String surname;
     private Long idOrder;
     private List<ClientProductDTO> products;
+    private double totalcost;
 
 }
