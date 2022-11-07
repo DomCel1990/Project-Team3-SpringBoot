@@ -8,11 +8,14 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import projectSpringBoot.projectTeam3SpringBoot.dto.ClientDTO;
+import projectSpringBoot.projectTeam3SpringBoot.dto.ClientProductDTO;
 import projectSpringBoot.projectTeam3SpringBoot.entities.Client;
 import projectSpringBoot.projectTeam3SpringBoot.entities.Order;
 import projectSpringBoot.projectTeam3SpringBoot.repositories.ClientRepository;
 import projectSpringBoot.projectTeam3SpringBoot.repositories.OrderRepository;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -44,27 +47,40 @@ public class ClientService {
             throw new Exception("The client " + id + " doesn't exist");
     }
 
-    public ClientDTO getInformatioOrder(Long id){
+    public ClientDTO getInformatioOrder(Long id) {
         Optional<Order> order = orderRepository.findById(id);
+
+        List<ClientProductDTO> clientProductDTOList = new ArrayList<>();
+
+        for (int i = 0; i < order.get().getProductList().size(); i++) {
+            clientProductDTOList.add(new ClientProductDTO(
+                    order.get().getProductList().get(i).getDescription(),
+                    order.get().getProductList().get(i).getType(),
+                    order.get().getProductList().get(i).getPrice()
+            ));
+        }
+
         ClientDTO dto = new ClientDTO();
         dto.setId(order.get().getClient().getIdClient());
         dto.setName(order.get().getClient().getNameClient());
         dto.setSurname(order.get().getClient().getSurnameClient());
         dto.setIdOrder(order.get().getIdOrder());
-        dto.setProducts(order.get().getProductList());
+        dto.setProducts(clientProductDTOList);
+
         return dto;
     }
-    public Client clientUpdate(Long id, Client client) throws Exception{
-        if(clientRepository.existsById(id)){
+
+    public Client clientUpdate(Long id, Client client) throws Exception {
+        if (clientRepository.existsById(id)) {
             client.setIdClient(id);
             Client clientUpdate = clientRepository.save(client);
             return clientUpdate;
-        }else
+        } else
             throw new Exception("The client " + id + " doesn't exist");
     }
 
-    public void clientDelete(Long id){
-        if(!clientRepository.existsById(id))
+    public void clientDelete(Long id) {
+        if (!clientRepository.existsById(id))
             System.out.println(HttpStatus.CONFLICT);
         else
             clientRepository.deleteById(id);
