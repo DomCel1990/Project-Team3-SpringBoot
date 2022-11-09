@@ -23,6 +23,11 @@ public class Employee {
     private Role role;
     @OneToMany
     private List<Order> orders;
+    @ManyToOne
+    @JoinColumn(name = "shop_id_shop")
+    private Shop shop;
+
+
 
     public Employee(){}
     public Employee(String name, String surname, String email, int age, int hoursWorked, boolean hasChildren, LocalDate dateAssumption, Role role,List<Order> orders) {
@@ -180,5 +185,12 @@ public class Employee {
 
     public void setOrders(List<Order> orders) {
         this.orders = orders;
+    }
+    public Shop getShop() {
+        return shop;
+    }
+
+    public void setShop(Shop shop) {
+        this.shop = shop;
     }
 }

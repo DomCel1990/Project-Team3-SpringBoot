@@ -21,24 +21,19 @@ public class ClientController {
     @Autowired
     ClientService clientService;
 
-    @PostMapping("/post")
-    public Client client(@RequestBody Client client){
-        Client client1 = clientRepository.save(client);
-        return client1;
+    @PostMapping
+    public List<Client> createClients(@RequestBody  List<Client> clients){
+        return clientService.createClients(clients);
     }
 
-    @GetMapping("/get")
-    public Page<Client> getAllClients(@RequestParam Optional<Integer> page, @RequestParam Optional<Integer> size){
+    @GetMapping
+    public Page<Client> getAllClients(@RequestParam(required = false) Optional<Integer> page, @RequestParam(required = false) Optional<Integer> size){
         return clientService.getAllClients(page, size);
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/{id}")
     public Optional<Client> getClient(@PathVariable Long id) throws Exception {
         return clientService.getClient(id);
-    }
-    @GetMapping("/details/{id}")
-    public ClientDTO getDetailsOrderClient(@PathVariable Long id){
-        return clientService.getInformatioOrder(id);
     }
 
     @PutMapping("/{id}")
@@ -46,7 +41,7 @@ public class ClientController {
         return clientService.clientUpdate(id, client);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/")
     public void deleteAll(){
         clientRepository.deleteAll();
     }
