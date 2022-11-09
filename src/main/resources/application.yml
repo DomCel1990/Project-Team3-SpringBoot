@@ -6,14 +6,14 @@ spring.mvc:
 
 spring.datasource.url: jdbc:mysql://127.0.0.1:3306/project1
 spring.datasource.username: root
-spring.datasource.password: Rootpass12
+spring.datasource.password: Rome2totalwar
 spring.datasource.driverClassName: com.mysql.cj.jdbc.Driver
 spring:
   jpa:
     database-platform=org:
       hibernate:
         dialect:
-          MySQL5InnoDBDialect
+          MySQL8InnoDBDialect
 spring.jpa:
     database: mysql
     show_sql: true

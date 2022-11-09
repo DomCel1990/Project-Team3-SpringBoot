@@ -21,18 +21,18 @@ public class ClientController {
     @Autowired
     ClientService clientService;
 
-    @PostMapping
+    @PostMapping("/post")
     public Client client(@RequestBody Client client){
         Client client1 = clientRepository.save(client);
         return client1;
     }
 
-    @GetMapping("/clients")
+    @GetMapping("/get")
     public Page<Client> getAllClients(@RequestParam Optional<Integer> page, @RequestParam Optional<Integer> size){
         return clientService.getAllClients(page, size);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/get/{id}")
     public Optional<Client> getClient(@PathVariable Long id) throws Exception {
         return clientService.getClient(id);
     }
