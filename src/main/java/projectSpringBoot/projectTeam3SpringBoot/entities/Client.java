@@ -1,15 +1,12 @@
 package projectSpringBoot.projectTeam3SpringBoot.entities;
 
-import org.springframework.lang.Nullable;
-
 import javax.persistence.*;
 
 @Entity
 @Table
 public class Client {
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
-    @Column(precision = 1)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idClient;
     private String nameClient;
     private String surnameClient;
@@ -18,6 +15,7 @@ public class Client {
     private String address;
     private int age;
     private boolean hasLoyaltyCard;
+
     public Client(){}
     public Client(String nameClient, String surnameClient, String emailClient, String address, int age, boolean hasLoyaltyCard) {
         this.nameClient = nameClient;
@@ -85,4 +83,5 @@ public class Client {
     public void setHasLoyaltyCard(boolean hasLoyaltyCard) {
         this.hasLoyaltyCard = hasLoyaltyCard;
     }
+
 }

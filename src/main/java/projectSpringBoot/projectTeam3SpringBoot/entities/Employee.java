@@ -4,7 +4,6 @@ import projectSpringBoot.projectTeam3SpringBoot.enu.Role;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Table
@@ -21,11 +20,9 @@ public class Employee {
     private boolean hasChildren;
     private LocalDate dateAssumption;
     private Role role;
-    @OneToMany
-    private List<Order> orders;
 
     public Employee(){}
-    public Employee(String name, String surname, String email, int age, int hoursWorked, boolean hasChildren, LocalDate dateAssumption, Role role,List<Order> orders) {
+    public Employee(String name, String surname, String email, int age, int hoursWorked, boolean hasChildren, LocalDate dateAssumption, Role role) {
         this.name = name;
         this.surname = surname;
         this.email = email;
@@ -33,8 +30,7 @@ public class Employee {
         this.hoursWorked = hoursWorked;
         this.hasChildren = hasChildren;
         this.dateAssumption = dateAssumption;
-        this.role=role;
-        this.setOrders(orders);
+
     }
 
     public boolean hasPermission(Permission permission) {
@@ -173,12 +169,4 @@ public class Employee {
         this.role = role;
     }
 
-
-    public List<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
-    }
 }

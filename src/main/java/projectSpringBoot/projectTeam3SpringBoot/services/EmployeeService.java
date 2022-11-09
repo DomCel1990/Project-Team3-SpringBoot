@@ -29,26 +29,6 @@ public class EmployeeService {
     @Autowired
     EmployeeRepository employeeRepository;
 
-    public void createEmployees(@RequestParam(required = false) int n) {
-        Random random = new Random();
-        List<Order> orderss= new ArrayList<Order>();
-        for (int i = 0; i < n; i++) {
-            String randomAttributeEmployee = random.ints(10, 97, 122)
-                    .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
-                    .toString();
-            Employee employee = employeeRepository.save(new Employee(
-                    Name.getRandomName().toString(),
-                    Surname.getRandomSurname().toString(),
-                    randomAttributeEmployee + "gmail.com",
-                    random.nextInt(18, 70),
-                    random.nextInt(120, 200),
-                    random.nextBoolean(),
-                    LocalDate.of(random.nextInt(1980, 2022), random.nextInt(1, 12), random.nextInt(1, 31)),
-                    Role.getRandomRoles(),
-                    orderss
-            ));
-        }
-    }
 
     public Employee createEmployee(Employee employee) {
         Employee employee1 = employeeRepository.save(employee);

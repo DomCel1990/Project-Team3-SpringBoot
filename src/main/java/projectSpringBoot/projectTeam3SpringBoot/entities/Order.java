@@ -17,10 +17,10 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "id")
     private Long idOrder;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "employee_id")
     private Employee employee;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "client_id")
     private Client client;
     @OneToMany(targetEntity = Product.class, cascade = CascadeType.ALL)
@@ -42,6 +42,7 @@ public class Order {
         }
         return sum;
     }
+
     public double getProfit() {
         double profit = getTotalSalePrice() - getTotalPrice();
         return profit;

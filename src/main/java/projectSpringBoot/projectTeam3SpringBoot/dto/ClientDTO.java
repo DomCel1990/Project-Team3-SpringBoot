@@ -13,5 +13,4 @@ public class ClientDTO {
     private Long idOrder;
     private List<ClientProductDTO> products;
     private double totalcost;
-
 }
