@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import projectSpringBoot.projectTeam3SpringBoot.dto.ClientDTO;
 import projectSpringBoot.projectTeam3SpringBoot.dto.ClientProductDTO;
 import projectSpringBoot.projectTeam3SpringBoot.entities.Client;
+import projectSpringBoot.projectTeam3SpringBoot.entities.Employee;
 import projectSpringBoot.projectTeam3SpringBoot.entities.Order;
 import projectSpringBoot.projectTeam3SpringBoot.repositories.ClientRepository;
 import projectSpringBoot.projectTeam3SpringBoot.repositories.OrderRepository;
@@ -25,11 +26,15 @@ public class ClientService {
     private ClientRepository clientRepository;
     @Autowired
     private OrderRepository orderRepository;
+    public List<Client> createClients(List<Client> clients) {
+        List<Client> clients1 = clientRepository.saveAllAndFlush(clients);
+        return clients1;
+    }
 
     public Page<Client> getAllClients(Optional<Integer> page, Optional<Integer> size) {
         Pageable pageable = null;
         if (page.isPresent() && size.isPresent()) {
-            Sort sort = Sort.by(new Sort.Order(Sort.Direction.ASC, "id"));
+            Sort sort = Sort.by(new Sort.Order(Sort.Direction.ASC, "idClient"));
             pageable = PageRequest.of(page.get(), size.get(), sort);
             Page<Client> ClientGet = clientRepository.findAll(pageable);
             return ClientGet;

@@ -22,13 +22,12 @@ public class ClientController {
     ClientService clientService;
 
     @PostMapping
-    public Client client(@RequestBody Client client){
-        Client client1 = clientRepository.save(client);
-        return client1;
+    public List<Client> createClients(@RequestBody  List<Client> clients){
+        return clientService.createClients(clients);
     }
 
-    @GetMapping("/clients")
-    public Page<Client> getAllClients(@RequestParam Optional<Integer> page, @RequestParam Optional<Integer> size){
+    @GetMapping
+    public Page<Client> getAllClients(@RequestParam(required = false) Optional<Integer> page, @RequestParam(required = false) Optional<Integer> size){
         return clientService.getAllClients(page, size);
     }
 
@@ -36,17 +35,13 @@ public class ClientController {
     public Optional<Client> getClient(@PathVariable Long id) throws Exception {
         return clientService.getClient(id);
     }
-    @GetMapping("/details/{id}")
-    public ClientDTO getDetailsOrderClient(@PathVariable Long id){
-        return clientService.getInformatioOrder(id);
-    }
 
     @PutMapping("/{id}")
     public Client clientUpdate(@PathVariable Long id, @RequestBody Client client) throws Exception{
         return clientService.clientUpdate(id, client);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/")
     public void deleteAll(){
         clientRepository.deleteAll();
     }

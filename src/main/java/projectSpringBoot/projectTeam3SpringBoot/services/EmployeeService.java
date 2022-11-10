@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -56,6 +57,7 @@ public class EmployeeService {
 
     public EmployeeDTO getEmployeeSalary(Long id) {
         Optional<Employee> employee = employeeRepository.findById(id);
+
         EmployeeDTO dto = new EmployeeDTO();
         dto.setIdEmployee(employee.get().getIdEmployee());
         dto.setName(employee.get().getName());
@@ -73,7 +75,7 @@ public class EmployeeService {
     public Page<Employee> getAllEmployee(Optional<Integer> page, Optional<Integer> size) {
         Pageable pageable = null;
         if (page.isPresent() && size.isPresent()) {
-            Sort sort = Sort.by(new Sort.Order(Sort.Direction.ASC, "id"));
+            Sort sort = Sort.by(new Sort.Order(Sort.Direction.ASC, "idEmployee"));
             pageable = PageRequest.of(page.get(), size.get(), sort);
             Page<Employee> EmployeeGet = employeeRepository.findAll(pageable);
             return EmployeeGet;

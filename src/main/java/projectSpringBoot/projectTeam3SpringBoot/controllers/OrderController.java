@@ -18,7 +18,7 @@ public class OrderController {
     private OrderRepository orderRepository;
 
 
-    @PostMapping("/create")
+    @PostMapping
     public Order placeOrder(@RequestBody Order order){
         return orderRepository.save(order);
     }
