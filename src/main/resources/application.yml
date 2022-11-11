@@ -21,6 +21,17 @@ spring.jpa:
       ddl-auto: create
 jackson.serialization:
       fail-on-empty-beans: false
+spring.mail:
+    host: smtp.gmail.com
+    port: 587
+    username: bcm.forprogress@gmail.com
+    password: tcpliaoolvqtcwhm
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 ---
 spring:
   config:

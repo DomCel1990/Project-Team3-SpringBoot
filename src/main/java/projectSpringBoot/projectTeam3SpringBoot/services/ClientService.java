@@ -6,6 +6,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import projectSpringBoot.projectTeam3SpringBoot.dto.ClientDTO;
 import projectSpringBoot.projectTeam3SpringBoot.dto.ClientProductDTO;
@@ -15,6 +17,8 @@ import projectSpringBoot.projectTeam3SpringBoot.entities.Order;
 import projectSpringBoot.projectTeam3SpringBoot.repositories.ClientRepository;
 import projectSpringBoot.projectTeam3SpringBoot.repositories.OrderRepository;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -91,4 +95,6 @@ public class ClientService {
         else
             clientRepository.deleteById(id);
     }
+
+
 }

@@ -8,5 +8,4 @@ import projectSpringBoot.projectTeam3SpringBoot.entities.Client;
 public interface ClientRepository extends JpaRepository<Client, Long> {
     @Query("SELECT p FROM Product p INNER JOIN Order o ON or_fk= o.idOrder")
     public ProductOrderDTO getProductOrder();
-
 }

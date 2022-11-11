@@ -35,9 +35,9 @@ public class SpringFoxConfig {
                 .build().apiInfo(new ApiInfo(
                         "Project Team 3 -The Powerful",
                         "Application that simulates the management of a shopping center",
-                        "1.0",
+                        "2.0",
                         "https://docs.github.com/en",
-                        new Contact("Team3", "https://github.com/DomCel1990/Project-Team3-SpringBoot", "team3@gmail.com"),
+                        new Contact("Team3", "https://github.com/DomCel1990/Project-Team3-SpringBoot", "bcm.forprogress.com"),
                         "GitHub",
                         "https://github.com/DomCel1990/Project-Team3-SpringBoot",
                         Collections.emptyList()
@@ -45,7 +45,7 @@ public class SpringFoxConfig {
                         new Tag("client-controller", "This client controller"),
                         new Tag("employee-controller", "This employee controller"),
                         new Tag("product-controller", "This product controller"),
-                        new Tag("car-controller", "This car controller"),
+                        new Tag("details-controller", "This details controller"),
                         new Tag("shop-controller", "This shop controller"),
                         new Tag("order-controller", "This is order controller")
                 )
