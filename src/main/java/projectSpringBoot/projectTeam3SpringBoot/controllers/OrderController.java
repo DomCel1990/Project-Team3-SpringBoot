@@ -26,12 +26,9 @@ public class OrderController{
 
 
     @PostMapping
+
     public ResponseEntity<String> createOrder(@RequestBody Order order) throws MessagingException {
         return orderService.createOrder(order);
+
     }
-
-
-
-
-
 }

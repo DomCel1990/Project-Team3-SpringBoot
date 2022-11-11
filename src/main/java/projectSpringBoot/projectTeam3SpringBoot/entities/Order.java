@@ -26,6 +26,9 @@ public class Order {
     @OneToMany(targetEntity = Product.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "or_fk", referencedColumnName = "id")
     private List<Product> productList;
+    @ManyToOne
+    @JoinColumn(name = "shop_id_shop")
+    private Shop shop;
 
     public double getTotalSalePrice() {
         double sum = 0;
