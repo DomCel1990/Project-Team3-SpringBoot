@@ -1,6 +1,7 @@
 package projectSpringBoot.projectTeam3SpringBoot.controllers;
 
 
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +27,7 @@ public class OrderController{
 
 
     @PostMapping
-
+    @ApiOperation(value = "Create orders", notes = "Creates and saves orders")
     public ResponseEntity<String> createOrder(@RequestBody Order order) throws MessagingException {
         return orderService.createOrder(order);
 

@@ -24,31 +24,31 @@ public class EmployeeController {
     EmployeeService employeeService;
 
     @PostMapping
-    @ApiOperation(value = "Create a list of Employee", notes = "Take a list of Employee and save them")
+    @ApiOperation(value = "Create a list of employee", notes = "Takes and saves a list of employees")
     public List<Employee> createEmployee(@RequestBody List<Employee> employees) {
         return employeeService.createEmployees(employees);
     }
 
     @GetMapping("/")
-    @ApiOperation(value = "Find the Employees", notes = "He takes the employees and makes a paged list of them")
+    @ApiOperation(value = "Find the employees", notes = "Makes a page with all the employees")
     public Page<Employee> getAllEmployee(@RequestParam(required = false) Optional<Integer> page, @RequestParam(required = false) Optional<Integer> size) {
         return employeeService.getAllEmployee(page, size);
     }
 
     @PutMapping("/{id}")
-    @ApiOperation(value = "Update Employee", notes = "Take and edit the employee by id")
+    @ApiOperation(value = "Update employee", notes = "Finds an employee using his id and edits him")
     public Employee employeeUpdate(@PathVariable Long id, @RequestBody Employee employee) throws Exception {
         return employeeService.employeeUpdate(id, employee);
     }
 
     @DeleteMapping("/{id}")
-    @ApiOperation(value = "Delete Employee", notes = "Delete the employee by id")
+    @ApiOperation(value = "Delete Employee", notes = "Deletes an employee through his id")
     public void employeeDelete(@PathVariable Long id) {
         employeeService.employeeDelete(id);
     }
 
     @DeleteMapping
-    @ApiOperation(value = "Delete the Employees", notes = "Delete the all employee")
+    @ApiOperation(value = "Delete the employees", notes = "Deletes all the employees")
     public void deleteAll() {
         employeeRepository.deleteAll();
     }
