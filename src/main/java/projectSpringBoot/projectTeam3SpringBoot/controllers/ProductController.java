@@ -30,30 +30,30 @@ public class ProductController {
     }
 
     @GetMapping
-    @ApiOperation(value = "Find Products", notes = "Find all products and insert them into a layout sorting them by ID")
+    @ApiOperation(value = "Find products", notes = "Finds all the products and inserts them into a layout, sorting them by ID")
     public Page<Product> getAllProduct(@RequestParam(required = false) Optional<Integer> page, @RequestParam(required = false) Optional<Integer> size) {
         return productService.getAllProduct(page, size);
     }
 
     @GetMapping("/{id}")
-    @ApiOperation(value = "Find Product", notes = "Find product by ID")
+    @ApiOperation(value = "Find a product", notes = "Finds a product by ID")
     public Optional<Product> getOneProduct(@PathVariable Long id) throws Exception {
         return productService.getProduct(id);
     }
 
     @PutMapping
-    @ApiOperation(value = "Product update", notes = "Edit a product by calling it through the ID")
+    @ApiOperation(value = "Product update", notes = "Edits a product by calling it through the ID")
     public Product putProduct(@PathVariable Long id, @RequestBody Product product) throws Exception {
         return productService.putProduct(id, product);
     }
     @DeleteMapping
-    @ApiOperation(value = "Products delete", notes = "Delete all products")
+    @ApiOperation(value = "Products delete", notes = "Deletes all the products")
     public void deleteAll() {
         productRepository.deleteAll();
     }
 
     @DeleteMapping("/{id}")
-    @ApiOperation(value = "Product delete", notes = "Delete a product by calling it through the ID")
+    @ApiOperation(value = "Product delete", notes = "Deletes a product by calling it through the ID")
     public void deleteById(@PathVariable Long id) {
         productRepository.deleteById(id);
     }

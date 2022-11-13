@@ -29,28 +29,31 @@ public class DetailsController {
     private ProductService productService;
 
     @GetMapping("/client-order/{id}")
-    @ApiOperation(value = "Find client Details", notes = "Find an client by the details")
+    @ApiOperation(value = "Find the client's details", notes = "Finds a client by the his details")
     public ClientDTO getDetailsOrderClient(@PathVariable Long id) {
         return clientService.getInformatioOrder(id);
     }
 
     @GetMapping("/employee-salary/{id}")
-    @ApiOperation(value = "Find an Employee", notes = "Find an Employee by the salary")
+    @ApiOperation(value = "Find an employee", notes = "Finds an employee by the salary")
     public EmployeeDTO getEmployeeSalary(@PathVariable Long id) {
         return employeeService.getEmployeeSalary(id);
     }
 
     @GetMapping("/employee-filter")
-    @ApiOperation(value = "Find the Employees", notes = "Find the Employees by the name and surname")
+    @ApiOperation(value = "Find the employees", notes = "Finds an employee by his name and surname")
     public List<Employee> findByNameOrSurname(@RequestParam(required = false) String name, @RequestParam(required = false) String surname, @RequestParam(required = false) Role role, @RequestParam(required = false) String email) {
         return employeeRepository.findByNameORDepartment(name, surname, role, email);
     }
+
     @GetMapping("/product-orders/{id}")
+    @ApiOperation(value = "Get the product ordered", notes = "Gets a product ordered by its id")
     public ProductOrderDTO getProductOrder(@PathVariable Long id) {
         return productService.getProductOrder(id);
     }
+
     @GetMapping("/product-filter")
-    @ApiOperation(value = "Find product whit filters", notes = "Find all the products that we have a higher price than the one selected either by type or through the description")
+    @ApiOperation(value = "Find products whit filters", notes = "Finds all the products that have higher prices than the one selected either by type or through the description")
     public List<Product> findByFilter(@RequestParam(required = false) Double salePrice, @RequestParam(required = false) String type, @RequestParam(required = false) String description) {
         return productService.findByPrice(salePrice, type, description);
     }
