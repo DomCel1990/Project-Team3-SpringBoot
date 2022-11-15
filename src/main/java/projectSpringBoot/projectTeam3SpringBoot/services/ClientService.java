@@ -68,7 +68,6 @@ public class ClientService {
                     order.get().getProductList().get(i).getSalePrice()
             ));
         }
-
         ClientDTO dto = new ClientDTO();
         dto.setId(order.get().getClient().getIdClient());
         dto.setName(order.get().getClient().getNameClient());

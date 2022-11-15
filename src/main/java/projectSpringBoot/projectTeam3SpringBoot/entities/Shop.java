@@ -2,6 +2,7 @@ package projectSpringBoot.projectTeam3SpringBoot.entities;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,17 +22,22 @@ public class Shop {
     @OneToMany(targetEntity = Product.class,cascade = CascadeType.ALL)
     @JoinColumn(name = "sP_fk", referencedColumnName = "idShop")
     private List<Product> productsShop;
+    @OneToMany(targetEntity = Order.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "order_fk",referencedColumnName = "idShop")
+    private List<Order> orderShop;
+
 
     public Shop() {
     }
 
-    public Shop(String nameShop, String addressShop, String numberToContact, String webSite, List<Employee> employees, List<Product> productsShop) {
+    public Shop(String nameShop, String addressShop, String numberToContact, String webSite, List<Employee> employees, List<Product> productsShop,List<Order> orderShop) {
         this.nameShop = nameShop;
         this.addressShop = addressShop;
         this.numberToContact = numberToContact;
         this.webSite = webSite;
         this.employees=employees;
         this.productsShop = productsShop;
+        this.setOrderShop(orderShop);
     }
 
     public double costProduct(){
@@ -53,7 +59,13 @@ public class Shop {
         String managementCost= nameShop +" in the address, "+ addressShop+ " has this cost management: "+totalCost;
         return managementCost;
     }
-
+    public double entryForOrder(){
+        double sum=0;
+        for(int i =0; i<getOrderShop().size();i++){
+           sum+= orderShop.get(i).getTotalSalePrice();
+        }
+        return sum;
+    }
     public String getName() {
         return nameShop;
     }
@@ -108,6 +120,14 @@ public class Shop {
 
     public void setEmployees(List<Employee> employees) {
         this.employees = employees;
+    }
+
+    public List<Order> getOrderShop() {
+        return orderShop;
+    }
+
+    public void setOrderShop(List<Order> orderShop) {
+        this.orderShop = orderShop;
     }
 }
 

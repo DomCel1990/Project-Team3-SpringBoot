@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import projectSpringBoot.projectTeam3SpringBoot.dto.ClientDTO;
 import projectSpringBoot.projectTeam3SpringBoot.dto.EmployeeDTO;
 import projectSpringBoot.projectTeam3SpringBoot.dto.ProductOrderDTO;
+import projectSpringBoot.projectTeam3SpringBoot.dto.ShopDTO;
 import projectSpringBoot.projectTeam3SpringBoot.entities.Employee;
 import projectSpringBoot.projectTeam3SpringBoot.entities.Product;
 import projectSpringBoot.projectTeam3SpringBoot.enu.Role;
@@ -13,6 +14,7 @@ import projectSpringBoot.projectTeam3SpringBoot.repositories.EmployeeRepository;
 import projectSpringBoot.projectTeam3SpringBoot.services.ClientService;
 import projectSpringBoot.projectTeam3SpringBoot.services.EmployeeService;
 import projectSpringBoot.projectTeam3SpringBoot.services.ProductService;
+import projectSpringBoot.projectTeam3SpringBoot.services.ShopService;
 
 import java.util.List;
 
@@ -27,6 +29,8 @@ public class DetailsController {
     private EmployeeRepository employeeRepository;
     @Autowired
     private ProductService productService;
+    @Autowired
+    private ShopService shopService;
 
     @GetMapping("/client-order/{id}")
     @ApiOperation(value = "Find the client's details", notes = "Finds a client by the his details")
@@ -56,5 +60,9 @@ public class DetailsController {
     @ApiOperation(value = "Find products whit filters", notes = "Finds all the products that have higher prices than the one selected either by type or through the description")
     public List<Product> findByFilter(@RequestParam(required = false) Double salePrice, @RequestParam(required = false) String type, @RequestParam(required = false) String description) {
         return productService.findByPrice(salePrice, type, description);
+    }
+    @GetMapping("/shop-balance/{id}")
+    public ShopDTO getBalance(@PathVariable Long id){
+        return shopService.getDetails(id);
     }
 }

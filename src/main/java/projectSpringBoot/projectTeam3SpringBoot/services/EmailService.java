@@ -32,4 +32,22 @@ public class EmailService {
 
         javaMailSender.send(message);
     }
+    public void sendToShop(String email, String title, String text) throws MessagingException {
+
+        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+
+        helper.setSubject(title);
+        helper.setTo(email);
+
+        boolean html = true;
+        String textHtml =
+                "<h1>" + title + "</h1><h2></h2>" +
+                        "<img src=https://www.gifanimate.com/data/media/1103/congratulazione-e-complimento-immagine-animata-0092.gif>" +
+                        "<h3>"+text +"</h3>";
+
+        helper.setText(textHtml, html);
+
+        javaMailSender.send(message);
+    }
 }
