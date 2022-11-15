@@ -1,13 +1,19 @@
 package projectSpringBoot.projectTeam3SpringBoot.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import projectSpringBoot.projectTeam3SpringBoot.entities.Order;
+import projectSpringBoot.projectTeam3SpringBoot.entities.Product;
 import projectSpringBoot.projectTeam3SpringBoot.repositories.OrderRepository;
 
 import javax.mail.MessagingException;
+import java.util.Optional;
 
 
 @Service
@@ -37,5 +43,35 @@ public class OrderService {
                         "Total Order: " + order1.getTotalSalePrice()
         );
         return ResponseEntity.status(HttpStatus.OK).body("Successful order create");
+    }
+
+    public Page<Order> getAllOrders(Optional<Integer> page, Optional<Integer> size) {
+        Pageable pageable = null;
+        if (page.isPresent() && size.isPresent()) {
+            Sort sort = Sort.by(new Sort.Order(Sort.Direction.ASC, "id"));
+            pageable = PageRequest.of(page.get(), size.get(), sort);
+            Page<Order> orderGet = orderRepository.findAll(pageable);
+            return orderGet;
+        } else {
+            Page<Order> pageOrder = Page.empty();
+            return pageOrder;
+        }
+    }
+
+    public Optional<Order> getOrder(Long id) throws Exception {
+        if (orderRepository.existsById(id)) {
+            Optional<Order> order = orderRepository.findById(id);
+            return order;
+        } else
+            throw new Exception("The order with id: " + id + ", doesn't exist");
+    }
+
+    public Order putOrder(Long id, Order order) throws Exception {
+        if (orderRepository.existsById(id)) {
+            order.setIdOrder(id);
+            Order order1 = orderRepository.save(order);
+            return order1;
+        } else
+            throw new Exception("Element not found");
     }
 }

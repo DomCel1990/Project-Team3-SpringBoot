@@ -60,7 +60,7 @@ public class ProductService {
             Optional<Product> product = productRepository.findById(id);
             return product;
         } else
-            throw new Exception("The product whit id: " + id + ", doesn't exist");
+            throw new Exception("The product with id: " + id + ", doesn't exist");
     }
 
     public Product putProduct(Long id, Product product) throws Exception {

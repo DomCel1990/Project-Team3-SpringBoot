@@ -46,6 +46,7 @@ public class ProductController {
     public Product putProduct(@PathVariable Long id, @RequestBody Product product) throws Exception {
         return productService.putProduct(id, product);
     }
+
     @DeleteMapping
     @ApiOperation(value = "Products delete", notes = "Deletes all the products")
     public void deleteAll() {
