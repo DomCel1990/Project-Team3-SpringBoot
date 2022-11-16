@@ -13,6 +13,7 @@ import projectSpringBoot.projectTeam3SpringBoot.entities.Product;
 import projectSpringBoot.projectTeam3SpringBoot.repositories.OrderRepository;
 
 import javax.mail.MessagingException;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 
@@ -23,6 +24,8 @@ public class OrderService {
     OrderRepository orderRepository;
     @Autowired
     EmailService emailService;
+    @Autowired
+    private ShopService shopService;
 
     public ResponseEntity<String> createOrder(Order order) throws MessagingException {
         Order order1 = orderRepository.save(order);
@@ -41,6 +44,13 @@ public class OrderService {
                         order1.getClient().getAddress() + "<br>" +
                         stringProduct + "<br>" +
                         "Total Order: " + order1.getTotalSalePrice()
+        );
+
+        emailService.sendToShop(
+                "bcm.forprogress@gmail.com",
+                "You have received an order. " + "<br>",
+                "This month the releases will be: " + "<br>" +
+                        shopService.getDetailsString(order1.getIdOrder())
         );
         return ResponseEntity.status(HttpStatus.OK).body("Successful order create");
     }
@@ -74,4 +84,5 @@ public class OrderService {
         } else
             throw new Exception("Element not found");
     }
+
 }
